@@ -52,7 +52,7 @@ const detect = async (net) => {
   if (
     typeof webcamRef.current !== "undefined" &&
      webcamRef.current != null &&
-     webcamRef.current.video.readState === 4
+     webcamRef.current.video.readyState === 4
       ) {
         // Get Video Properties
         const video = webcamRef.current.video;
@@ -64,8 +64,8 @@ const detect = async (net) => {
         webcamRef.current.video.height = videoHeight;
 
         // Set canvas width
-        canvasRef.current.video.width = videoWidth;
-        canvasRef.current.video.height = videoHeight;
+        canvasRef.current.width = videoWidth;
+        canvasRef.current.height = videoHeight;
 
         // Make detections
         // Allows us to detect all our facial landmarks; nose, mouth, ears, etc... estimate faces //* const face = await net.estimateFaces(video);
