@@ -35,6 +35,44 @@ const runFacemesh = async () =>{
   })
 }
 
+// Detect function
+// Will only run if the webcam has input data
+// checking webcam is not undefined  //* typeof webcamRef.current !== "undefined" &&
+// checking webcam not null //* webcamRef.current != null
+// checking webcam is receiving data //* webcamRef.current.video.readState === 4
+
+
+//  net is grabbing the neural network from tensorflow //* const detect = async (net) => {
+const detect = async (net) => {
+  if (
+    typeof webcamRef.current !== "undefined" &&
+     webcamRef.current != null &&
+     webcamRef.current.video.readState === 4
+      ) {
+        // Get Video Properties
+        const video = webcamRef.current.video;
+        const videoWidth = webcamRef.current.video.videoWidth;
+        const videoHeight = webcamRef.current.video.videoHeight;
+
+        // Set Video Width
+        webcamRef.current.video.width = videoWidth;
+        webcamRef.current.video.height = videoHeight;
+
+        // Set canvas width
+        canvasRef.current.video.width = videoWidth;
+        canvasRef.current.video.height = videoHeight;
+
+        // Make detections
+        // Allows us to detect all our facial landmarks; nose, mouth, ears, etc... estimate faces //* const face = await net.estimateFaces(video);
+        const face = await net.estimateFaces(video);
+        console.log(face);
+
+        // Get canvas context for drawing
+
+
+      }
+}
+
 
   return (
     <div className="App">
