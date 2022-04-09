@@ -27,13 +27,18 @@ const webcamRef = useRef(null);
 const canvasRef = useRef(null);
 
 // Load facemesh
-// inputResolution:{How big of an image we are bringing in w, h}, scale: how much we want to scale it down 
+// inputResolution:{How big of an image we are bringing in w, h}, scale: how much we want to scale it down //* inputResolution:{width:640, height:480}, scale:0.8,
+// loading setinterval and running detect function we created on line //* detect(net)
 
 const runFacemesh = async () =>{
   const net = await facemesh.load({
-    inputResolution:{width:640, height:480}, scale:0.8
-  })
-}
+    inputResolution:{width:640, height:480}, scale:0.8,
+  });
+  setInterval(()=>{
+    detect(net)
+    // !! RUNNING EVERY MILLISECOND 
+  }, 100)
+};
 
 // Detect function
 // Will only run if the webcam has input data
@@ -73,6 +78,9 @@ const detect = async (net) => {
       }
 }
 
+// Have to actually run the function after all the const have been created //* runFacemesh();
+
+runFacemesh();
 
   return (
     <div className="App">
