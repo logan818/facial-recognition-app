@@ -1,9 +1,9 @@
 /** Steps
  * Install Dependencies  DONE
- * Import dependencies
- * Setup webcam and canvas
- * Define references to those
- * Load facemesh
+ * Import dependencies DONE
+ * Setup webcam and canvas DONE 
+ * Define references to those DONE 
+ * Load facemesh DONE 
  * Detect function
  * Drawing utilities
  * Load triangulation
@@ -20,21 +20,54 @@ import Webcam from 'react-webcam';
 import './App.css';
 
 function App() {
+
+
+//Setup Reference
+const webcamRef = useRef(null);
+const canvasRef = useRef(null);
+
+// Load facemesh
+// inputResolution:{How big of an image we are bringing in w, h}, scale: how much we want to scale it down 
+
+const runFacemesh = async () =>{
+  const net = await facemesh.load({
+    inputResolution:{width:640, height:480}, scale:0.8
+  })
+}
+
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <Webcam ref={webcamRef} style ={
+        {
+        position: "absolute",
+        marginLeft: "auto",
+        marginRight: "auto",
+        left: 0,
+        right: 0,
+        textAlign: "center",
+        zIndex: 9,
+        width: 640,
+        height: 480 
+        }
+      } />
+
+      <canvas ref={ canvasRef }
+      style = {
+      {
+        position: "absolute",
+        marginLeft: "auto",
+        marginRight: "auto",
+        left: 0,
+        right: 0,
+        textAlign: "center",
+        zIndex: 9,
+        width: 640,
+        height: 480 
+        }
+      } ></canvas>
+      
       </header>
     </div>
   );
