@@ -4,8 +4,8 @@
  * Setup webcam and canvas DONE 
  * Define references to those DONE 
  * Load facemesh DONE 
- * Detect function
- * Drawing utilities
+ * Detect function Might have buggs
+ * Drawing utilities 
  * Load triangulation
  * Setup triangle path
  * Setup point drawing
@@ -18,6 +18,7 @@ import * as facemesh from "@tensorflow-models/facemesh";
 import Webcam from 'react-webcam';
 //import logo from './logo.svg';
 import './App.css';
+import {drawMesh} from './utilities';
 
 function App() {
 
@@ -73,8 +74,8 @@ const detect = async (net) => {
         console.log(face);
 
         // Get canvas context for drawing
-
-
+        const ctx = canvasRef.current.getContext("2d");
+        drawMesh(face, ctx)
       }
 }
 
